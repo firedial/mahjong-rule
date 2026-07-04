@@ -3527,6 +3527,7 @@
       // returns { version, valueString, readonly } or null
       const q = new URLSearchParams(location.search);
       const version = q.get(PARAM_V);
+      const shortVersion = version == null ? null : version.split(".").slice(0, 2).join(".");
       const rawR = q.get(PARAM_R) || "";
       const valueString = rawR ? expandRuns(rawR) : "";
       const readonly = q.get(PARAM_MODE) === "ro";
@@ -3963,12 +3964,12 @@
 
       const latest = "1.0"; // @todo latest を入れる
       const known = ["1.0"]; // @todo 実際のファイルを見て作る
-      let version = (requested && requested.version) ? requested.version : latest;
+      let version = (requested && requested.shortVersion) ? requested.shortVersion : latest;
       let notice = "";
 
-      if (requested && requested.version && !known.includes(requested.version)) {
+      if (requested && requested.shortVersion && !known.includes(requested.shortVersion)) {
         notice =
-          `共有リンクのバージョン「${requested.version}」は見つかりませんでした。` +
+          `共有リンクのバージョン「${requested.shortVersion}」は見つかりませんでした。` +
           `最新バージョン（${latest}）で表示します。選択内容は復元されていません。`;
         version = latest;
         requested.valueString = "";
