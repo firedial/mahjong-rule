@@ -3363,7 +3363,7 @@
     const PARAM_V = "v";               // URL query key: version
     const PARAM_R = "r";               // URL query key: ruleset (value string)
     const PARAM_MODE = "mode";         // URL query key: "ro" => readonly (閲覧専用)
-    const versionUrl = v => `rules/v0/v${v}.json`;
+    const versionUrl = v => `rules/v${v.split(".")[0]}/v${v}.json`;
     const PLACEHOLDER = "-";           // marks unselected / non-applicable in value string
 
     /* ================= runtime state ================= */
@@ -3961,8 +3961,9 @@
       showNotice("ルールデータを読み込み中…", "loading");
       const requested = parseParam();  // { version, valueString } or null
 
-      const latest = "0.1"; // @todo latest を入れる
-      const known = ["0.1"]; // @todo 実際のファイルを見て作る
+      const manifest = await fetchJson("rules/manifest.json");
+      const latest = manifest.latest;
+      const known = manifest.versions;
       let version = (requested && requested.version) ? requested.version : latest;
       let notice = "";
 
