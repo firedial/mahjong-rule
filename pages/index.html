@@ -3606,7 +3606,8 @@
         modeToggle.hidden = false;
         modeToggle.querySelectorAll(".mode-opt").forEach(b =>
           b.classList.toggle("is-active", b.dataset.mode === (readonly ? "ro" : "rw")));
-        footerBar.hidden = true;
+        footerBar.hidden = false;
+        document.getElementById("footerBackBtn").hidden = true;
       } else {
         // rules screen: subnav (heading + sort) shown, footer has カテゴリ一覧 back
         catScreen.hidden = true;
@@ -3615,6 +3616,7 @@
         homeCornerBtn.hidden = true;
         modeToggle.hidden = true;
         footerBar.hidden = false;
+        document.getElementById("footerBackBtn").hidden = false;
         renderRules();
       }
       if (activeCategory == null) renderCategoryGrid();
@@ -3778,10 +3780,12 @@
             lab.setAttribute("aria-disabled", "true");
             if (readonly) lab.classList.add("readonly-opt");
           }
+          if (readonly && !checked && selections[fullId]) return;
           body.appendChild(lab);
         });
         card.appendChild(body);
       }
+      if (readonly && !meta.isGroup && !enabled) return;
       container.appendChild(card);
 
       if (node.children && node.children.length) {
