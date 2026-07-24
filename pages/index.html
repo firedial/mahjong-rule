@@ -102,22 +102,28 @@
       font-size: 12px;
       color: #b8c4c4;
     }
+
     .home-source h2 {
       font-size: 13px;
       font-weight: 600;
       color: #e0e8e4;
       margin: 0 0 8px;
     }
+
     .home-source p {
       margin: 0 0 8px;
       line-height: 1.7;
     }
+
     .home-source a {
       color: #4db88a;
       text-decoration: none;
       word-break: break-all;
     }
-    .home-source a:hover { text-decoration: underline; }
+
+    .home-source a:hover {
+      text-decoration: underline;
+    }
 
     .home-choices {
       display: grid;
@@ -999,7 +1005,8 @@
         <div class="home-source">
           <h2>ルール出典</h2>
           <p>らすかるの家で掲載されていたルールをもとに作成しています。<br>サイト自体は閉鎖済みのため、アーカイブからルールを取得しています。</p>
-          <a href="https://web.archive.org/web/20250331131725/http://www10.plala.or.jp/rascalhp/" target="_blank" rel="noopener">らすかるの家（アーカイブ）</a>
+          <a href="https://web.archive.org/web/20250331131725/http://www10.plala.or.jp/rascalhp/" target="_blank"
+            rel="noopener">らすかるの家（アーカイブ）</a>
         </div>
       </div>
     </section>
@@ -3965,7 +3972,9 @@
       }
 
       try {
-        const data = await fetchJson(versionUrl(version));
+        // @todo 後で戻す
+        // const data = await fetchJson(versionUrl(version));
+        const data = await fetchJson("rules/latest.json");
         finalize(data, requested, version, notice);
       } catch (e) {
         showNotice(`バージョン ${version} のルールデータを読み込めませんでした。`, "");
