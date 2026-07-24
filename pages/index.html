@@ -1021,7 +1021,7 @@
         <h2 class="cat-heading" id="catHeading"></h2>
         <div class="sort-toggle" role="group" aria-label="表示順">
           <button type="button" class="sort-opt is-active" data-sort="status">状態順</button>
-          <button type="button" class="sort-opt" data-sort="id">ID順</button>
+          <button type="button" class="sort-opt" data-sort="id">表示順</button>
         </div>
       </div>
     </div>
@@ -3664,9 +3664,11 @@
       let tops = DATA.rules.filter(r => r.category === activeCategory);
       if (sortMode === "status") {
         tops = tops
-          .map((r, i) => ({ r, i, rank: topRuleStatusRank(r) }))
-          .sort((a, b) => a.rank - b.rank || a.i - b.i)
+          .map(r => ({ r, rank: topRuleStatusRank(r) }))
+          .sort((a, b) => a.rank - b.rank || Number(a.r.order) - Number(b.r.order))
           .map(x => x.r);
+      } else {
+        tops = [...tops].sort((a, b) => Number(a.order) - Number(b.order));
       }
       ruleOrderCache = tops;
     }
