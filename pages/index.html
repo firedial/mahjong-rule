@@ -545,21 +545,6 @@
       opacity: 0.6;
     }
 
-    .dep-warn {
-      margin: 0 18px 12px;
-      background: #fbf1d3;
-      border: 1px solid var(--st-check);
-      border-radius: var(--radius);
-      padding: 8px 12px;
-      font-size: 12.5px;
-      color: #8a6a10;
-      font-family: var(--sans);
-    }
-
-    .dep-warn::before {
-      content: "⚠ ";
-    }
-
     .rule-info {
       margin: 0 18px 10px;
       font-size: 12px;
@@ -3455,49 +3440,30 @@
 
     /* ================= visibility ================= */
     // Evaluate a single rule's OWN condition (not counting ancestors).
-    // Returns { pass, depMissing } where depMissing (if any) describes an
-    // external dependency that hasn't been answered yet.
     function ownCondition(meta) {
       const n = meta.node;
       if (n.showWhen) {
         const parentVal = selections[meta.parentPath];
-        if (!parentVal || !n.showWhen.includes(parentVal)) return { pass: false, depMissing: null };
+        if (!parentVal || !n.showWhen.includes(parentVal)) return false;
       }
       if (n.showWhenAny) {
-        let depMissing = null;
         const ok = n.showWhenAny.some(cond => {
-          if (cond.dep) {
-            const parentNode = meta.parentPath ? nodeIndex[meta.parentPath]?.node : null;
-            const deps = parentNode && parentNode.dependencies;
-            const targetId = deps && deps[cond.dep];
-            if (!targetId) return false;
-            if (selections[targetId] == null && !depMissing) {
-              const t = nodeIndex[targetId];
-              depMissing = { targetId, title: t ? t.node.title : targetId };
-            }
-            return selections[targetId] === cond.value;
-          }
           const sibFullId = meta.parentPath ? `${meta.parentPath}-${cond.id}` : cond.id;
           return selections[sibFullId] === cond.value;
         });
-        if (!ok) return { pass: false, depMissing };
+        if (!ok) return false;
       }
-      return { pass: true, depMissing: null };
+      return true;
     }
 
     // A node is ENABLED when its own condition passes AND every ancestor is enabled.
-    // Disabled nodes are still rendered (grayed out); dep-driven ones may carry a warning.
     function gateState(meta) {
-      // walk ancestors first
       if (meta.parentPath && nodeIndex[meta.parentPath]) {
-        const pg = gateState(nodeIndex[meta.parentPath]);
-        if (!pg.enabled) return { enabled: false, depMissing: null };
+        if (!gateState(nodeIndex[meta.parentPath])) return false;
       }
-      const oc = ownCondition(meta);
-      return { enabled: oc.pass, depMissing: oc.pass ? null : oc.depMissing };
+      return ownCondition(meta);
     }
-    function isEnabled(meta) { return gateState(meta).enabled; }
-    // Back-compat: some callers ask "is this answerable & currently active".
+    function isEnabled(meta) { return gateState(meta); }
     function isVisible(meta) { return isEnabled(meta); }
 
     /* ================= URL encode / decode =================
@@ -3722,8 +3688,7 @@
     function renderNode(node, parentPath, depth, container) {
       const fullId = parentPath ? parentPath + "-" + node.id : node.id;
       const meta = nodeIndex[fullId];
-      const gate = gateState(meta);
-      const enabled = gate.enabled;
+      const enabled = gateState(meta);
       const interactive = enabled && !readonly;   // readonly disables editing but not visibility
 
       const card = document.createElement("section");
@@ -3771,14 +3736,6 @@
         if (node.note) bits.push(asText(node.note));
         info.textContent = bits.join(" ／ ");
         if (bits.length) card.appendChild(info);
-      }
-
-      // dep-missing warning (only for external dependency references)
-      if (!enabled && gate.depMissing) {
-        const warn = document.createElement("div");
-        warn.className = "dep-warn";
-        warn.textContent = `「${gate.depMissing.title}」（${gate.depMissing.targetId}）を先に選んでください`;
-        card.appendChild(warn);
       }
 
       if (!meta.isGroup) {
