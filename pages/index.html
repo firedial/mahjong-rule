@@ -3750,10 +3750,7 @@
           lab.innerHTML =
             `<input type="radio" tabindex="-1" name="r-${fullId}" value="${opt.value}" ${checked ? "checked" : ""} ${interactive ? "" : "disabled"}>
          <span class="box">${opt.value}</span><span class="label"></span>`;
-          const labelText = opt.detail
-            ? `${opt.label}\n${asText(opt.detail)}`
-            : opt.label;
-          lab.querySelector(".label").textContent = labelText;
+          lab.querySelector(".label").textContent = Array.isArray(opt.label) ? opt.label.join("\n") : opt.label;
           lab.setAttribute("role", "radio");
           lab.setAttribute("aria-checked", checked ? "true" : "false");
 
@@ -3784,7 +3781,7 @@
         node.children.forEach(c => renderNode(c, fullId, depth + 1, container));
       }
     }
-    // meta/note/detail values may be a string or an array of strings
+    // meta/note values may be a string or an array of strings
     function asText(v) { return Array.isArray(v) ? v.join(" ／ ") : v; }
 
     /* ================= meter ================= */
