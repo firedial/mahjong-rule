@@ -3446,13 +3446,6 @@
         const parentVal = selections[meta.parentPath];
         if (!parentVal || !n.showWhen.includes(parentVal)) return false;
       }
-      if (n.showWhenAny) {
-        const ok = n.showWhenAny.some(cond => {
-          const sibFullId = meta.parentPath ? `${meta.parentPath}-${cond.id}` : cond.id;
-          return selections[sibFullId] === cond.value;
-        });
-        if (!ok) return false;
-      }
       return true;
     }
 
