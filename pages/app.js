@@ -163,7 +163,7 @@
     }
     function syncUrlBar() {
       try {
-        history.replaceState(null, "", location.pathname + buildQuery());
+        history.replaceState({ screen, activeCategory }, "", location.pathname + buildQuery());
       } catch (e) { /* file:// may block; ignore */ }
     }
 
@@ -202,7 +202,7 @@
         footerBar.hidden = true;
         catScreen.hidden = true;
         ruleScreen.hidden = true;
-        try { history.replaceState(null, "", location.pathname); } catch (e) { }
+        try { history.replaceState({ screen: "home", activeCategory: null }, "", location.pathname); } catch (e) { }
         return;
       }
 
@@ -266,7 +266,7 @@
          <span class="cat-todo"><i class="dot dot-todo"></i>未選 <b>${st.todo}</b></span>
        </span>`;
         btn.querySelector(".cat-name").textContent = cat.label;
-        btn.addEventListener("click", () => { activeCategory = cat.id; computeRuleOrder(); render(); });
+        btn.addEventListener("click", () => navigate("categories", cat.id));
         catGrid.appendChild(btn);
       });
     }
@@ -486,17 +486,32 @@
     document.getElementById("closeSheet").addEventListener("click", closeSheet);
     document.getElementById("closeSheet2").addEventListener("click", closeSheet);
     sheet.addEventListener("click", e => { if (e.target === sheet) closeSheet(); });
-    // footer back button: goes up one level (rules → categories → home)
+    function navigate(newScreen, newCategory) {
+      screen = newScreen;
+      activeCategory = newCategory;
+      if (newCategory != null) computeRuleOrder();
+      try {
+        const url = screen === "home" ? location.pathname : location.pathname + buildQuery();
+        history.pushState({ screen, activeCategory }, "", url);
+      } catch (e) {}
+      render();
+    }
+
+    window.addEventListener("popstate", e => {
+      const state = e.state;
+      screen = state ? state.screen : "home";
+      activeCategory = state ? state.activeCategory : null;
+      if (activeCategory != null) computeRuleOrder();
+      render();
+    });
+
     // footer back (rules screen only): return to category list
     document.getElementById("footerBackBtn").addEventListener("click", () => {
-      activeCategory = null;
-      render();
+      navigate("categories", null);
     });
     // top-right button on the category list: back to the top (entry) screen
     document.getElementById("homeCornerBtn").addEventListener("click", () => {
-      screen = "home";
-      activeCategory = null;
-      render();
+      navigate("home", null);
     });
     // readonly / writable toggle (category list). Reflected into the URL via syncUrlBar().
     document.querySelectorAll("#modeToggle .mode-opt").forEach(btn => {
@@ -521,9 +536,7 @@
         flagged.clear();
         if (valueString) applyValueString(valueString);
         readonly = false;            // presets open in editable mode
-        screen = "categories";
-        activeCategory = null;
-        render();
+        navigate("categories", null);
       });
     });
     // sort mode toggle
