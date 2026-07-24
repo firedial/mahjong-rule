@@ -1186,6 +1186,9 @@
                     "a"
                   ]
                 }
+              ],
+              "showWhen": [
+                "b"
               ]
             },
             {
@@ -1239,6 +1242,9 @@
                     "a"
                   ]
                 }
+              ],
+              "showWhen": [
+                "b"
               ]
             },
             {
@@ -1261,6 +1267,9 @@
                   "value": "d",
                   "label": "流局時に飛ぶことはない"
                 }
+              ],
+              "showWhen": [
+                "b"
               ]
             },
             {
@@ -1325,6 +1334,9 @@
                     "h"
                   ]
                 }
+              ],
+              "showWhen": [
+                "b"
               ]
             }
           ],
@@ -5259,25 +5271,19 @@
                   "options": [
                     {
                       "value": "a",
-                      "label": "なし"
+                      "label": "七対子の4枚使いを認めているので無関係"
                     },
                     {
                       "value": "b",
-                      "label": "三倍満"
+                      "label": "なし"
                     },
                     {
                       "value": "c",
-                      "label": "役満"
-                    }
-                  ],
-                  "showWhenAny": [
-                    {
-                      "dep": "setChiitoi",
-                      "value": "a"
+                      "label": "三倍満"
                     },
                     {
-                      "dep": "setChiitoi",
-                      "value": "b"
+                      "value": "d",
+                      "label": "役満"
                     }
                   ]
                 },
@@ -5287,21 +5293,15 @@
                   "options": [
                     {
                       "value": "a",
-                      "label": "なし"
+                      "label": "七対子の4枚使いを認めているので無関係"
                     },
                     {
                       "value": "b",
-                      "label": "役満"
-                    }
-                  ],
-                  "showWhenAny": [
-                    {
-                      "dep": "setChiitoi",
-                      "value": "a"
+                      "label": "なし"
                     },
                     {
-                      "dep": "setChiitoi",
-                      "value": "b"
+                      "value": "c",
+                      "label": "役満"
                     }
                   ]
                 },
@@ -5311,25 +5311,23 @@
                   "options": [
                     {
                       "value": "a",
-                      "label": "なし"
+                      "label": "七対子の4枚使いを認めていないので無関係"
                     },
                     {
                       "value": "b",
-                      "label": "三倍満"
+                      "label": "なし"
                     },
                     {
                       "value": "c",
-                      "label": "役満"
+                      "label": "三倍満"
                     },
                     {
                       "value": "d",
-                      "label": "ダブル役満"
-                    }
-                  ],
-                  "showWhenAny": [
+                      "label": "役満"
+                    },
                     {
-                      "dep": "setChiitoi",
-                      "value": "c"
+                      "value": "e",
+                      "label": "ダブル役満"
                     }
                   ]
                 },
@@ -5339,35 +5337,30 @@
                   "options": [
                     {
                       "value": "a",
-                      "label": "なし"
+                      "label": "七対子の4枚使いを認めていないので無関係"
                     },
                     {
                       "value": "b",
-                      "label": "三倍満"
+                      "label": "なし"
                     },
                     {
                       "value": "c",
-                      "label": "役満"
+                      "label": "三倍満"
                     },
                     {
                       "value": "d",
-                      "label": "ダブル役満"
-                    }
-                  ],
-                  "showWhenAny": [
+                      "label": "役満"
+                    },
                     {
-                      "dep": "setChiitoi",
-                      "value": "c"
+                      "value": "e",
+                      "label": "ダブル役満"
                     }
                   ]
                 }
               ],
               "showWhen": [
                 "b"
-              ],
-              "dependencies": {
-                "setChiitoi": "3-09-08"
-              }
+              ]
             },
             {
               "id": "02",
