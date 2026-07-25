@@ -497,6 +497,16 @@
       background: #f8f5ee;
     }
 
+    .rule[data-depth="3"] {
+      margin-left: 66px;
+      background: #faf8f3;
+    }
+
+    .rule[data-depth="4"] {
+      margin-left: 88px;
+      background: #fbf9f6;
+    }
+
     .rule.is-group>.rule-body {
       display: none;
     }
@@ -565,7 +575,9 @@
     }
 
     .rule[data-depth="1"] .rule-head,
-    .rule[data-depth="2"] .rule-head {
+    .rule[data-depth="2"] .rule-head,
+    .rule[data-depth="3"] .rule-head,
+    .rule[data-depth="4"] .rule-head {
       padding-top: 12px;
       padding-bottom: 12px;
     }
@@ -603,6 +615,14 @@
 
     .rule[data-depth="2"] .rule-title {
       font-size: 14px;
+    }
+
+    .rule[data-depth="3"] .rule-title {
+      font-size: 13px;
+    }
+
+    .rule[data-depth="4"] .rule-title {
+      font-size: 12px;
     }
 
     /* 要確認 toggle */
@@ -955,6 +975,14 @@
 
       .rule[data-depth="2"] {
         margin-left: 22px;
+      }
+
+      .rule[data-depth="3"] {
+        margin-left: 32px;
+      }
+
+      .rule[data-depth="4"] {
+        margin-left: 40px;
       }
 
       .bar .status {
