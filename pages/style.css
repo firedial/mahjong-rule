@@ -95,6 +95,12 @@
       color: #b8c4c4;
     }
 
+    .home-source hr {
+      border: none;
+      border-top: 1px solid var(--panel-line);
+      margin: 16px 0;
+    }
+
     .home-source h2 {
       font-size: 13px;
       font-weight: 600;
