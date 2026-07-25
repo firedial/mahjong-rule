@@ -576,6 +576,9 @@
       const badge = document.getElementById("verBadge");
       badge.hidden = false;
       badge.textContent = "v" + CURRENT_VERSION;
+      const homeVersion = document.getElementById("homeVersion");
+      homeVersion.hidden = false;
+      homeVersion.textContent = "v" + CURRENT_VERSION;
 
       if (noticeHtml) showNotice(noticeHtml, ""); else hideNotice();
       render();

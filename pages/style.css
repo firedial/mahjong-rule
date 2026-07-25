@@ -78,9 +78,17 @@
     }
 
     .home-lead {
-      margin: 14px 0 30px;
+      margin: 14px 0 8px;
       font-size: 13px;
       color: #cdd8cf;
+    }
+
+    .home-version {
+      margin: 6px 0 30px;
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--gold);
+      letter-spacing: 0.05em;
     }
 
     .home-source {
