@@ -202,7 +202,11 @@
         footerBar.hidden = true;
         catScreen.hidden = true;
         ruleScreen.hidden = true;
-        try { history.replaceState({ screen: "home", activeCategory: null }, "", location.pathname); } catch (e) { }
+        try {
+          const hasSelections = Object.keys(selections).length > 0;
+          const url = hasSelections ? location.pathname + buildQuery() : location.pathname;
+          history.replaceState({ screen: "home", activeCategory: null }, "", url);
+        } catch (e) { }
         return;
       }
 
@@ -507,7 +511,7 @@
 
     // footer back (rules screen only): return to category list
     document.getElementById("footerBackBtn").addEventListener("click", () => {
-      navigate("categories", null);
+      history.back();
     });
     // top-right button on the category list: back to the top (entry) screen
     document.getElementById("homeCornerBtn").addEventListener("click", () => {
