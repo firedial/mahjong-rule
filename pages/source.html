@@ -5,129 +5,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>まえがき — 麻雀ルール設定</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    .source-inner {
+      color: var(--panel);
+      padding: 32px 0 64px;
     }
-
-    body {
-      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-      font-size: 15px;
-      line-height: 1.8;
-      color: #2c2c2c;
-      background: #f5f2eb;
-      padding: 24px 16px 64px;
-    }
-
-    .wrap {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
     .back {
       display: inline-block;
       margin-bottom: 24px;
-      color: #4a7c59;
+      color: var(--gold);
       text-decoration: none;
       font-size: 14px;
     }
-
-    .back:hover {
-      text-decoration: underline;
-    }
-
-    h1 {
-      font-size: 20px;
-      margin-bottom: 24px;
-      color: #1e3a28;
-    }
-
-    .section {
-      margin-bottom: 32px;
-    }
-
-    .sec-id {
-      font-family: monospace;
-      font-size: 12px;
-      color: #888;
-      margin-bottom: 2px;
-    }
-
-    h2 {
-      font-size: 17px;
-      margin-bottom: 8px;
-      color: #1e3a28;
-      border-bottom: 1px solid #d4ccb0;
-      padding-bottom: 4px;
-    }
-
-    h3 {
-      font-size: 15px;
-      margin-bottom: 6px;
-      color: #2c4a38;
-    }
-
-    h4 {
-      font-size: 14px;
-      margin-bottom: 4px;
-      color: #3a5a44;
-      font-weight: bold;
-    }
-
-    p {
-      margin-bottom: 12px;
-    }
-
-    ul {
-      margin: 8px 0 12px 20px;
-    }
-
-    li {
-      margin-bottom: 4px;
-    }
-
-    .subsection {
-      margin: 16px 0 16px 16px;
-    }
-
-    .subsubsection {
-      margin: 12px 0 12px 16px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #1a1f1c;
-        color: #d8d4c8;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4 {
-        color: #a8c8b0;
-      }
-
-      h2 {
-        border-bottom-color: #3a4a40;
-      }
-
-      .back {
-        color: #7ab890;
-      }
-
-      .sec-id {
-        color: #666;
-      }
-    }
+    .back:hover { text-decoration: underline; }
+    .source-inner h1 { font-size: 20px; margin-bottom: 24px; }
+    .source-inner h2 { font-size: 17px; margin: 20px 0 8px; border-bottom: 1px solid var(--panel-line); padding-bottom: 4px; opacity: 0.9; }
+    .source-inner h3 { font-size: 15px; margin: 14px 0 6px; opacity: 0.85; }
+    .source-inner h4 { font-size: 14px; margin: 10px 0 4px; font-weight: bold; opacity: 0.8; }
+    .source-inner p { margin-bottom: 12px; font-size: 14px; line-height: 1.8; opacity: 0.85; }
+    .source-inner ul { margin: 8px 0 12px 20px; }
+    .source-inner li { margin-bottom: 4px; font-size: 14px; line-height: 1.8; opacity: 0.85; }
+    .sec-id { font-family: var(--mono); font-size: 11px; opacity: 0.4; margin-bottom: 2px; }
+    .subsection { margin: 16px 0 16px 16px; }
+    .subsubsection { margin: 12px 0 12px 16px; }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+    <div class="source-inner">
     <a class="back" href="index.html">← トップに戻る</a>
     <div class="section">
       <div class="sec-id">0</div>
@@ -214,6 +121,7 @@
           <p>特に正式名称を使用するようには努めておりません。通称の方がわかりやすいと思われるものは、通称を使用しています。</p>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </body>
