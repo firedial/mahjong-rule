@@ -611,6 +611,15 @@
       height: 24px;
     }
 
+    @media (min-width: 600px) {
+      .tile-img {
+        height: 40px;
+      }
+      .tile-img.tile-horiz {
+        height: 32px;
+      }
+    }
+
     .tile-sep {
       width: 6px;
     }
