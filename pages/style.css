@@ -577,10 +577,32 @@
 
     .rule-example {
       margin: 0 18px 10px;
+      display: flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .tile-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      flex-shrink: 0;
+    }
+    .tile-img.tile-horiz {
+      height: 32px;
+    }
+
+    .tile-sep {
+      width: 6px;
+    }
+
+    .tile-note {
       font-size: 12px;
       color: var(--ink-soft);
-      font-family: var(--mono);
-      line-height: 1.5;
+      margin-left: 4px;
+      align-self: center;
+      line-height: 1;
     }
 
     .rule-head {

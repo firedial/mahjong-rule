@@ -355,7 +355,35 @@ function renderNode(node, parentPath, depth, container) {
   if (node.example) {
     const ex = document.createElement("div");
     ex.className = "rule-example";
-    ex.textContent = "例：" + node.example.hand + (node.example.note ? `（${node.example.note}）` : "");
+    renderHandTiles(node.example.hand, ex);
+    if (node.example.note) {
+      const noteStr = node.example.note;
+      const m = noteStr.match(/^(.*)([1-9])([mpsz])$/);
+      const open = document.createElement("span");
+      open.className = "tile-note";
+      open.textContent = "（";
+      ex.appendChild(open);
+      if (m) {
+        const pre = document.createElement("span");
+        pre.className = "tile-note";
+        pre.textContent = m[1];
+        ex.appendChild(pre);
+        const img = document.createElement("img");
+        img.src = tileImgSrc(m[3], m[2], false, false);
+        img.alt = m[2] + m[3];
+        img.className = "tile-img";
+        ex.appendChild(img);
+        const close = document.createElement("span");
+        close.className = "tile-note";
+        close.textContent = "）";
+        ex.appendChild(close);
+      } else {
+        const span = document.createElement("span");
+        span.className = "tile-note";
+        span.textContent = noteStr + "）";
+        ex.appendChild(span);
+      }
+    }
     card.appendChild(ex);
   }
 
@@ -402,6 +430,88 @@ function renderNode(node, parentPath, depth, container) {
 }
 // meta/note values may be a string or an array of strings
 function asText(v) { return Array.isArray(v) ? v.join(" ／ ") : v; }
+
+/* ================= tile image rendering ================= */
+const Z_IMG = { '1': 'e', '2': 's', '3': 'w', '4': 'n', '5': 'no', '6': 'h', '7': 'c' };
+function tileImgSrc(suit, num, horiz, isBack) {
+  if (isBack) return 'images/p_bk_1.gif';
+  const o = horiz ? '3' : '1';
+  if (suit === 'm') return `images/p_ms${num}_${o}.gif`;
+  if (suit === 'p') return `images/p_ps${num}_${o}.gif`;
+  if (suit === 's') return `images/p_ss${num}_${o}.gif`;
+  if (suit === 'z') {
+    const l = Z_IMG[num] || 'no';
+    return l === 'no' ? `images/p_no_${o}.gif` : `images/p_ji_${l}_${o}.gif`;
+  }
+  return `images/p_no_1.gif`;
+}
+function parseTileStr(str) {
+  const tiles = [];
+  let digits = [];
+  let markerAfterIdx = null;
+  let markerType = null;
+
+  function flush(suit) {
+    const n = digits.length;
+    const allSame = n > 0 && digits.every(d => d === digits[0]);
+    if (markerAfterIdx !== null) {
+      if (markerAfterIdx < n) {
+        // 埋め込みマーカー(チー): マーカー直前の牌を横にして左端へ
+        const horizIdx = markerAfterIdx - 1;
+        const ordered = [horizIdx, ...Array.from({ length: n }, (_, i) => i).filter(i => i !== horizIdx)];
+        for (const i of ordered)
+          tiles.push({ suit, num: digits[i], horiz: i === horizIdx, isBack: false });
+      } else if (allSame) {
+        // 末尾マーカー+同一牌: ポン/明槓
+        const horizIdx = markerType === '-' ? 0 : markerType === '=' ? Math.floor(n / 2) : n - 1;
+        for (let i = 0; i < n; i++)
+          tiles.push({ suit, num: digits[i], horiz: i === horizIdx, isBack: false });
+      } else {
+        // 末尾マーカー+異なる牌: チー(末尾牌が横・左端へ)
+        const horizIdx = n - 1;
+        const ordered = [horizIdx, ...Array.from({ length: n }, (_, i) => i).filter(i => i !== horizIdx)];
+        for (const i of ordered)
+          tiles.push({ suit, num: digits[i], horiz: i === horizIdx, isBack: false });
+      }
+    } else if (n === 4 && allSame) {
+      // 暗槓: 両端が裏牌
+      for (let i = 0; i < n; i++)
+        tiles.push({ suit, num: digits[i], horiz: false, isBack: i === 0 || i === n - 1 });
+    } else {
+      for (const d of digits)
+        tiles.push({ suit, num: d, horiz: false, isBack: false });
+    }
+    digits = []; markerAfterIdx = null; markerType = null;
+  }
+
+  for (const ch of str) {
+    if (ch >= '1' && ch <= '9') {
+      digits.push(ch);
+    } else if (ch === '-' || ch === '+' || ch === '=') {
+      markerAfterIdx = digits.length;
+      markerType = ch;
+    } else if ('mpsz'.includes(ch)) {
+      flush(ch);
+    }
+  }
+  return tiles;
+}
+function renderHandTiles(handStr, container) {
+  handStr.split(',').forEach((part, i) => {
+    if (i > 0) {
+      const sep = document.createElement('span');
+      sep.className = 'tile-sep';
+      container.appendChild(sep);
+    }
+    for (const { suit, num, horiz, isBack } of parseTileStr(part)) {
+      const img = document.createElement('img');
+      img.src = tileImgSrc(suit, num, horiz, isBack);
+      img.alt = num + suit;
+      img.className = 'tile-img' + (horiz ? ' tile-horiz' : '');
+      container.appendChild(img);
+    }
+  });
+}
 
 /* ================= meter ================= */
 function visibleAnswerable() {
