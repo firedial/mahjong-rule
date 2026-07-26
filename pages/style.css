@@ -583,6 +583,15 @@
       line-height: 1.5;
     }
 
+    .rule-info p {
+      margin: 0 0 2px;
+    }
+
+    .rule-info-content {
+      margin-top: 6px !important;
+      font-size: 13px;
+    }
+
     .rule-example {
       margin: 0 18px 10px;
       display: flex;
@@ -622,11 +631,9 @@
       align-items: baseline;
       gap: 12px;
       padding: 14px 18px;
-      border-bottom: 1px solid var(--panel-line);
     }
 
     .is-group>.rule-head {
-      border-bottom: none;
       padding-bottom: 8px;
     }
 
@@ -732,6 +739,7 @@
 
     .rule-body {
       padding: 10px 18px 16px;
+      border-top: 1px solid var(--panel-line);
     }
 
     .opt {
