@@ -443,7 +443,7 @@ function tileImgSrc(suit, num, horiz, isBack) {
   }
   return `images/p_no_1.gif`;
 }
-function parseTileStr(str) {
+function parseTileStr(str, isMeld = false) {
   const tiles = [];
   let digits = [];
   let markerAfterIdx = null;
@@ -471,7 +471,7 @@ function parseTileStr(str) {
         for (const i of ordered)
           tiles.push({ suit, num: digits[i], horiz: i === horizIdx, isBack: false });
       }
-    } else if (n === 4 && allSame) {
+    } else if (isMeld && n === 4 && allSame) {
       // 暗槓: 両端が裏牌
       for (let i = 0; i < n; i++)
         tiles.push({ suit, num: digits[i], horiz: false, isBack: i === 0 || i === n - 1 });
@@ -501,7 +501,7 @@ function renderHandTiles(handStr, container) {
       sep.className = 'tile-sep';
       container.appendChild(sep);
     }
-    for (const { suit, num, horiz, isBack } of parseTileStr(part)) {
+    for (const { suit, num, horiz, isBack } of parseTileStr(part, i > 0)) {
       const img = document.createElement('img');
       img.src = tileImgSrc(suit, num, horiz, isBack);
       img.alt = num + suit;
