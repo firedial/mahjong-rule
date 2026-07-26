@@ -597,6 +597,10 @@
       width: 6px;
     }
 
+    .tile-note-gap {
+      width: 8px;
+    }
+
     .tile-note {
       font-size: 12px;
       color: var(--ink-soft);

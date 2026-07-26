@@ -357,30 +357,27 @@ function renderNode(node, parentPath, depth, container) {
     ex.className = "rule-example";
     renderHandTiles(node.example.hand, ex);
     if (node.example.note) {
+      const gap = document.createElement("span");
+      gap.className = "tile-note-gap";
+      ex.appendChild(gap);
       const noteStr = node.example.note;
       const m = noteStr.match(/^(.*)([1-9])([mpsz])$/);
-      const open = document.createElement("span");
-      open.className = "tile-note";
-      open.textContent = "（";
-      ex.appendChild(open);
       if (m) {
-        const pre = document.createElement("span");
-        pre.className = "tile-note";
-        pre.textContent = m[1];
-        ex.appendChild(pre);
+        if (m[1]) {
+          const pre = document.createElement("span");
+          pre.className = "tile-note";
+          pre.textContent = m[1];
+          ex.appendChild(pre);
+        }
         const img = document.createElement("img");
         img.src = tileImgSrc(m[3], m[2], false, false);
         img.alt = m[2] + m[3];
         img.className = "tile-img";
         ex.appendChild(img);
-        const close = document.createElement("span");
-        close.className = "tile-note";
-        close.textContent = "）";
-        ex.appendChild(close);
       } else {
         const span = document.createElement("span");
         span.className = "tile-note";
-        span.textContent = noteStr + "）";
+        span.textContent = noteStr;
         ex.appendChild(span);
       }
     }
