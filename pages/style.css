@@ -601,13 +601,14 @@
     }
 
     .tile-img {
-      height: 40px;
+      height: 30px;
       width: auto;
       display: block;
       flex-shrink: 0;
     }
+
     .tile-img.tile-horiz {
-      height: 32px;
+      height: 24px;
     }
 
     .tile-sep {
