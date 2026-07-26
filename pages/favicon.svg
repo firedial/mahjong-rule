@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- tile body -->
+  <rect x="3" y="2" width="26" height="28" rx="3" fill="#f3efe4"/>
+  <rect x="3" y="2" width="26" height="28" rx="3" fill="none" stroke="#d9d2bf" stroke-width="1"/>
+  <!-- 中 character -->
+  <text x="16" y="23" font-family="serif" font-size="18" font-weight="bold" fill="#b7472a" text-anchor="middle">中</text>
+</svg>
