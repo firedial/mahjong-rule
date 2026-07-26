@@ -340,21 +340,24 @@ function renderNode(node, parentPath, depth, container) {
   }
   card.appendChild(head);
 
-  // metadata / note (from v2): show 別名・意味 etc. compactly
-  if (node.meta || node.note) {
+  if (node.meta) {
     const info = document.createElement("div");
     info.className = "rule-info";
     const bits = [];
-    if (node.meta) {
-      const m = node.meta;
-      if (m.alias) bits.push(`別名：${asText(m.alias)}`);
-      if (m.meaning) bits.push(asText(m.meaning));
-      if (m.content) bits.push(asText(m.content));
-      if (m.condition) bits.push(`条件：${asText(m.condition)}`);
-    }
-    if (node.note) bits.push(asText(node.note));
+    const m = node.meta;
+    if (m.read) bits.push(`読み：${asText(m.read)}`);
+    if (m.alias) bits.push(`別名：${asText(m.alias)}`);
+    if (m.meaning) bits.push(asText(m.meaning));
+    if (m.content) bits.push(asText(m.content));
     info.textContent = bits.join(" ／ ");
     if (bits.length) card.appendChild(info);
+  }
+
+  if (node.example) {
+    const ex = document.createElement("div");
+    ex.className = "rule-example";
+    ex.textContent = "例：" + node.example.hand + (node.example.note ? `（${node.example.note}）` : "");
+    card.appendChild(ex);
   }
 
   if (!meta.isGroup) {
