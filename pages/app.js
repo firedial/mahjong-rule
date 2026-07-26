@@ -347,7 +347,7 @@ function renderNode(node, parentPath, depth, container) {
     if (m.alias || m.content) {
       const info = document.createElement("div");
       info.className = "rule-info";
-      if (m.alias) { const p = document.createElement("p"); p.textContent = `別名：${asText(m.alias)}`; info.appendChild(p); }
+      if (m.alias) { const p = document.createElement("p"); p.textContent = `別名: ${asText(m.alias)}`; info.appendChild(p); }
       if (m.content) { const p = document.createElement("p"); p.className = "rule-info-content"; p.textContent = asText(m.content); info.appendChild(p); }
       card.appendChild(info);
     }
