@@ -5399,7 +5399,7 @@
       },
       "example": {
         "hand": "2456789s,333=z,12-3s",
-        "note": "2sロン"
+        "note": "ロン2s"
       },
       "options": [
         {
@@ -7850,7 +7850,7 @@
       },
       "example": {
         "hand": "1s,234-m,45-6p,999=p,6-78s",
-        "note": "1sロン"
+        "note": "ロン1s"
       },
       "options": [
         {
@@ -7874,7 +7874,7 @@
       },
       "example": {
         "hand": "5z,5-67m,78-9m,3-45p,111+s",
-        "note": "5zロン"
+        "note": "ロン5z"
       },
       "options": [
         {
@@ -7939,7 +7939,7 @@
       },
       "example": {
         "hand": "34599m222p46s,789-s",
-        "note": "5sロン"
+        "note": "ロン5s"
       },
       "options": [
         {
@@ -7962,7 +7962,7 @@
       },
       "example": {
         "hand": "456m11222p24s,7-89p",
-        "note": "3sロン"
+        "note": "ロン3s"
       },
       "options": [
         {
@@ -7986,7 +7986,7 @@
       },
       "example": {
         "hand": "2m,777=m,111+p,567-p,34-5s",
-        "note": "2mロン"
+        "note": "ロン2m"
       },
       "options": [
         {
@@ -8190,7 +8190,7 @@
       },
       "example": {
         "hand": "46789m44p333s,123-m",
-        "note": "5mロン"
+        "note": "ロン5m"
       },
       "options": [
         {
@@ -8238,7 +8238,7 @@
       },
       "example": {
         "hand": "1223344677799m",
-        "note": "5mツモ"
+        "note": "ツモ5m"
       },
       "options": [
         {
@@ -8304,7 +8304,7 @@
       },
       "example": {
         "hand": "34588m567p88999s",
-        "note": "8sロン"
+        "note": "ロン8s"
       },
       "options": [
         {
@@ -8327,7 +8327,7 @@
       },
       "example": {
         "hand": "99m234p111s44z,4-56m",
-        "note": "4zロン"
+        "note": "ロン4z"
       },
       "options": [
         {
@@ -8350,7 +8350,7 @@
       },
       "example": {
         "hand": "1234488m777s,34-5p",
-        "note": "8mロン"
+        "note": "ロン8m"
       },
       "options": [
         {
@@ -8380,7 +8380,7 @@
       },
       "example": {
         "hand": "11345p33368s,567-m",
-        "note": "7sロン"
+        "note": "ロン7s"
       },
       "options": [
         {
@@ -10768,7 +10768,7 @@
       },
       "example": {
         "hand": "2223467m,1111m,9999m",
-        "note": "8mロン"
+        "note": "ロン8m"
       },
       "options": [
         {
@@ -10860,7 +10860,7 @@
       },
       "example": {
         "hand": "67m123p77s,345-s,1111z",
-        "note": "8mロン"
+        "note": "ロン8m"
       },
       "options": [
         {
@@ -10946,7 +10946,7 @@
       },
       "example": {
         "hand": "4s,666+m,45-6s,7-89m,333=p",
-        "note": "4sロン"
+        "note": "ロン4s"
       },
       "options": [
         {
