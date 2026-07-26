@@ -263,13 +263,14 @@ function renderCategoryGrid() {
     btn.dataset.complete = complete ? "true" : "false";
     btn.innerHTML =
       `<span class="cat-arrow">→</span>
-       <span class="cat-name"></span>
+       <span class="cat-name"><span class="cat-id"></span><span class="cat-label"></span></span>
        <span class="cat-stats">
          <span class="cat-done"><i class="dot dot-done"></i>選択 <b>${st.done}</b></span>
          <span class="cat-check"><i class="dot dot-check"></i>確認 <b>${st.check}</b></span>
          <span class="cat-todo"><i class="dot dot-todo"></i>未選 <b>${st.todo}</b></span>
        </span>`;
-    btn.querySelector(".cat-name").textContent = cat.label;
+    btn.querySelector(".cat-id").textContent = cat.id;
+    btn.querySelector(".cat-label").textContent = cat.label;
     btn.addEventListener("click", () => navigate("categories", cat.id));
     catGrid.appendChild(btn);
   });

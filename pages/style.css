@@ -338,6 +338,14 @@
       margin-bottom: 12px;
     }
 
+    .cat-card .cat-id {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 400;
+      opacity: 0.5;
+      margin-right: 6px;
+    }
+
     .cat-card .cat-stats {
       display: flex;
       gap: 12px;
