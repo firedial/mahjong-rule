@@ -663,13 +663,25 @@
       background: var(--accent);
     }
 
+    .rule-title-wrap {
+      flex: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
     .rule-title {
       font-family: var(--serif);
       font-weight: 600;
       font-size: 16px;
       letter-spacing: 0.02em;
       color: var(--ink);
-      flex: 1;
+    }
+
+    .rule-read {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--ink-soft);
     }
 
     .rule[data-depth="1"] .rule-title {

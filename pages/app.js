@@ -317,9 +317,10 @@ function renderNode(node, parentPath, depth, container) {
 
   const head = document.createElement("div");
   head.className = "rule-head";
-  head.innerHTML = `<span class="rule-id"></span><span class="rule-title"></span>`;
+  head.innerHTML = `<span class="rule-id"></span><span class="rule-title-wrap"><span class="rule-title"></span>${node.meta?.read ? '<span class="rule-read"></span>' : ''}</span>`;
   head.querySelector(".rule-id").textContent = node.id;
   head.querySelector(".rule-title").textContent = node.title;
+  if (node.meta?.read) head.querySelector(".rule-read").textContent = asText(node.meta.read);
 
   if (!meta.isGroup) {
     card.dataset.status = enabled ? statusOf(fullId) : "disabled";
@@ -343,10 +344,9 @@ function renderNode(node, parentPath, depth, container) {
 
   if (node.meta) {
     const m = node.meta;
-    if (m.read || m.alias || m.content) {
+    if (m.alias || m.content) {
       const info = document.createElement("div");
       info.className = "rule-info";
-      if (m.read) { const p = document.createElement("p"); p.textContent = `読み：${asText(m.read)}`; info.appendChild(p); }
       if (m.alias) { const p = document.createElement("p"); p.textContent = `別名：${asText(m.alias)}`; info.appendChild(p); }
       if (m.content) { const p = document.createElement("p"); p.className = "rule-info-content"; p.textContent = asText(m.content); info.appendChild(p); }
       card.appendChild(info);
