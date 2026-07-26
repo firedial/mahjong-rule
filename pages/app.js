@@ -347,7 +347,6 @@ function renderNode(node, parentPath, depth, container) {
     const m = node.meta;
     if (m.read) bits.push(`読み：${asText(m.read)}`);
     if (m.alias) bits.push(`別名：${asText(m.alias)}`);
-    if (m.meaning) bits.push(asText(m.meaning));
     if (m.content) bits.push(asText(m.content));
     info.textContent = bits.join(" ／ ");
     if (bits.length) card.appendChild(info);
