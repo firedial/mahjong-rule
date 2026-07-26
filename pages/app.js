@@ -317,7 +317,7 @@ function renderNode(node, parentPath, depth, container) {
   const head = document.createElement("div");
   head.className = "rule-head";
   head.innerHTML = `<span class="rule-id"></span><span class="rule-title"></span>`;
-  head.querySelector(".rule-id").textContent = fullId.replace(/^\d+-/, "");
+  head.querySelector(".rule-id").textContent = node.id;
   head.querySelector(".rule-title").textContent = node.title;
 
   if (!meta.isGroup) {
