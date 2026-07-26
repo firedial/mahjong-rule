@@ -712,9 +712,7 @@ async function boot() {
   }
 
   try {
-    // @todo 後で戻す
-    // const data = await fetchJson(versionUrl(version));
-    const data = await fetchJson("rules/latest.json");
+    const data = await fetchJson(versionUrl(version));
     finalize(data, requested, version, notice);
   } catch (e) {
     showNotice(`バージョン ${version} のルールデータを読み込めませんでした。`, "");
